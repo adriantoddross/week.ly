@@ -24,8 +24,10 @@ class LinkedList {
   }
 
   addLast(item) {
+  // Travserse to the end of the list, stop at the last node, then add a new node.
 
     if (this.head === null) {
+      // If the list is empty, just make it the head.
       this.addFirst(item);
     } else {
       let tempNode = this.head;
