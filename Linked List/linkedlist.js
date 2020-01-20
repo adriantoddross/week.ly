@@ -9,9 +9,9 @@ class LinkedList {
     this.head = null;
   }
 
-  addFirst(data) {
+  addFirst(item) {
   // Create a node and prepend it to the beginning of the list
-    this.head = new Node(data, this.head);
+    this.head = new Node(item, this.head);
   }
 
   traverse() {
@@ -20,6 +20,21 @@ class LinkedList {
     
     while (tempNode !== null) {
       tempNode = tempNode.next;
+    }
+  }
+
+  addLast(item) {
+
+    if (this.head === null) {
+      this.addFirst(item);
+    } else {
+      let tempNode = this.head;
+
+      while (tempNode.next !== null) {
+        tempNode = tempNode.next;
+      }
+
+      tempNode = new Node(item, null);
     }
   }
 }
