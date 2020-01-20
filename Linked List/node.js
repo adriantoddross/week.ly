@@ -6,5 +6,5 @@ class Node {
   }
 }
 
-module.exports = Node.js;
+module.exports = Node;
 
