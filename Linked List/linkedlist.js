@@ -39,6 +39,21 @@ class LinkedList {
       tempNode = new Node(item, null);
     }
   }
+
+  insertAfter(key, toInsert) {
+    // Find an element then insert a new node after it.
+    let tempNode = this.head;
+
+    while (tempNode !== null && tempNode.value !== key) {
+      // Traverse until we find a match.
+      tempNode = tempNode.next;
+    }
+
+    if (tempNode !== null) {
+      // Insert a new node after our match, then point to the following node
+      tempNode.next = new Node(toInsert, tempNode.next);
+    }
+  }
 }
 
 module.export = LinkedList;
