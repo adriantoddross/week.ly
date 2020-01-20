@@ -38,3 +38,5 @@ class LinkedList {
     }
   }
 }
+
+module.export = LinkedList;
