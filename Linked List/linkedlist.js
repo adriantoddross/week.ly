@@ -13,4 +13,13 @@ class LinkedList {
   // Create a node and prepend it to the beginning of the list
     this.head = new Node(data, this.head);
   }
+
+  traverse() {
+  // Start with the head and access each node until you reach null.  
+    let tempNode = this.head;
+    
+    while (tempNode !== null) {
+      tempNode = tempNode.next;
+    }
+  }
 }
