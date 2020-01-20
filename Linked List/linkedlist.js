@@ -8,4 +8,9 @@ class LinkedList {
   constructor() {
     this.head = null;
   }
+
+  addFirst(data) {
+  // Create a node and prepend it to the beginning of the list
+    this.head = new Node(data, this.head);
+  }
 }
