@@ -54,6 +54,27 @@ class LinkedList {
       tempNode.next = new Node(toInsert, tempNode.next);
     }
   }
+
+  insertBefore(key, toInsert) {
+    if (this.head === null) return null;
+
+    if (this.head.value === key) {
+      this.addFirst(toInsert);
+      return;
+    }
+
+    let previous = null;
+    let current = this.head;
+
+    while (current !== null && current.value !== key) {
+      previous = current;
+      current = current.next;
+    }
+
+    if (current !== null) {
+      previous.next = new Node(toInsert, current);
+    }
+  }
 }
 
 module.export = LinkedList;
