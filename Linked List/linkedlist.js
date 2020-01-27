@@ -63,8 +63,8 @@ class LinkedList {
       return;
     }
 
-    let previous = null;
     let current = this.head;
+    let previous = null;
 
     while (current !== null && current.value !== key) {
       previous = current;
@@ -74,6 +74,33 @@ class LinkedList {
     if (current !== null) {
       previous.next = new Node(toInsert, current);
     }
+  }
+
+  remove(key) {
+    // If the list is empty, throw an error.
+    if (this.head === null) throw new Error('Cannot delete');
+    
+    // If we're deleting the head, replace it & exit the function.
+    if (this.head.value === key) {
+      this.head = this.head.next;
+      return;
+    }
+
+    let current = this.head;
+    let previous = null;
+
+    while (current !== null & current.data !== key) {
+      previous = current;
+      current = current.next;
+    }
+
+    // If the node is not in the list, throw an error.
+    if (current === null) {
+      throw new Error('Cannot delete');
+    }
+
+    // Delete current node.
+    previous.next = current.next;
   }
 }
 
