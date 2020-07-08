@@ -1,50 +1,54 @@
-var createError = require("http-errors");
-var express = require("express");
-import { Request, Response, NextFunction, Errback } from "express";
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+import cookieParser from 'cookie-parser';
+import createError from 'http-errors';
+import express, { Request, Response, NextFunction } from 'express';
+import logger from 'morgan';
+import path from 'path';
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+import indexRouter from './routes/index';
+import usersRouter from './routes/users';
 
-var app = express();
+const app = express();
+const port: string | number = process.env.PORT || 3000;
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-app.use(logger("dev"));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req: Request, res: Response, next: NextFunction) {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
 });
 
+interface ResponseError extends Error {
+  status?: number;
+}
+
 // error handler
-app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
+app.use((err: ResponseError, req: Request, res: Response) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.render('error');
 });
 
 app
-  .listen(3000, function () {
-    console.log("Example app listening on port 3000!");
+  .listen(port, () => {
+    console.info(`Listening on port ${port}.`);
   })
-  .on("error", (err: any) => {
-    console.error("Express failed to start");
+  .on('error', (err) => {
+    console.error('Express failed to start');
     console.error(err);
   });
 
